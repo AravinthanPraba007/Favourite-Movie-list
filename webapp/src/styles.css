@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+/* include stylesheet for movie-cruiser */
+/* movie-cruiser all-page footer*/
+#movie-cruiser-footer {
+  /*  position:fixed;
+        bottom:0;*/
+  background-color: #4d004d;
+  width: 100%;
+}
+
+.movie-cruiser-main-icon.material-icons {
+  font-size: 40px;
+}
+
+/* main navigation background color */
+#movie-cruiser-main-nav {
+  background-color: #4d004d;
+}
+
+/*movie-cruiser main icon*/
+#movie-cruiser-main-img {
+  width: 50px;
+  height: 50px;
+  padding: 15px;
+}
+
+/*Has teaser icon as blue*/
+#movie_cruiser_done_teaser_icon {
+  color: #000066;
+}
+
+/*color for buttons as purple*/
+#movie_cruiser_button_purple,
+#movie_cruiser_save_button {
+  background-color: #4d004d;
+  border-color: #4d004d;
+}
+
+#movie_cruiser_main_search_image {
+  background-image: url("https://images.unsplash.com/photo-1526045004414-3e7ed02f9ca1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1250&q=160");
+  background-repeat: repeat;
+}
+
+/*edit movie container*/
+.container.movie-cruiser-edit-container {
+  max-width: 1500px;
+}
+
+/*for a smaller container*/
+.container.width-half-screen {
+  max-width: 500px;
+}
+
+/*login page container*/
+.container.login-container.border {
+  max-width: 400px;
+}
+
+/*hand pointer for trash can in remove favorites*/
+.material-icons.trash-can {
+  cursor: pointer;
+}

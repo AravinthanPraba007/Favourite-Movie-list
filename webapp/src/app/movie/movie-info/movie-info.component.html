@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3 col-sm-12 d-flex align-items-stretch mb-3" *ngFor="let movieItem of movie">
+      <div class="card">
+        <img class="card-img-top" src={{movieItem.imageUrl}} alt={{movieItem.title}} />
+        <div class="card-body">
+          <div class="card-title font-weight-bold">
+            <div class="row">
+              <div class="col-6">
+                {{movieItem.title}}
+              </div>
+              <div class="col-6 text-right text-danger">
+                {{movieItem.boxOffice| currency :'USD' : 'symbol' : '1.0-0' }}
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2" *ngIf="isEditAllowed()">
+            <div class="col-6" *ngIf=movieItem.active>
+              <span class="badge badge-success">Active</span>{{movieItem.genre}}
+            </div>
+            <div class="col-6" *ngIf=!movieItem.active>
+              <span class="badge badge-danger">Inactive</span>{{movieItem.genre}}
+            </div>
+            <div class="col-6 text-right" *ngIf=movieItem.hasTeaser>
+              <i id="movie_cruiser_done_teaser_icon" class="material-icons" style="vertical-align:middle">done</i><span
+                class="badge badge-info m-2">Teaser</span>
+            </div>
+            <div class="col-6 text-right" *ngIf="!movieItem.hasTeaser">
+              <i class="material-icons text-danger" style="vertical-align:middle">close</i><span
+                class="badge badge-danger m-2">Teaser</span>
+            </div>
+          </div>
+          <div class="row" *ngIf="itemAdded && itemId==movieItem.id">
+            <div class="col-12">
+              <p class="p-3 alert alert-success">Movie added successfully.</p>
+            </div>
+          </div>
+          <div class="row mb-2" *ngIf="!isEditAllowed()">
+            <div class="col-6">
+              {{movieItem.genre}}
+            </div>
+            <div class="col-6 text-right" *ngIf="movieItem.hasTeaser">
+              <i id="movie_cruiser_done_teaser_icon" class="material-icons" style="vertical-align:middle">done</i><span
+                class="badge badge-info m-2">Teaser</span>
+            </div>
+            <div class="col-6 text-right" *ngIf="!movieItem.hasTeaser">
+              <i class="material-icons text-danger" style="vertical-align:middle">close</i><span
+                class="badge badge-danger m-2">Teaser</span>
+            </div>
+          </div>
+          <div class="row" *ngIf="isEditAllowed()">
+            <div class="col-6 font-weight-light">
+              <div>
+                <i class="material-icons" style="vertical-align:middle">schedule</i>Launch
+              </div>
+              <div>
+                {{movieItem.dateOfLaunch | date:'dd/MM/yyyy'}}
+              </div>
+            </div>
+            <div class="col-6">
+              <a [routerLink]="['/movie-edit',movieItem.id]" id="movie_cruiser_button_purple"
+                class="btn btn-success float-right"><i class="material-icons"
+                  style="vertical-align:middle">edit</i>Edit</a>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isEditAllowed()">
+            <div class="col-12">
+              <button id="movie_cruiser_button_purple" class="btn btn-success float-right"
+                (click)=" onAddToFavoritesClick(movieItem.id)"><i class="material-icons"
+                  style="vertical-align:middle">favorite</i>Add to Favorites</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

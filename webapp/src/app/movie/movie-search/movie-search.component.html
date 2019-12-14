@@ -1,0 +1,13 @@
+<div class="jumbotron" id="movie_cruiser_main_search_image">
+  <label class="control-label" for="Find Movie">
+    <h1 class="text-light pl-5 pt-5 pl-2">Find Movie</h1>
+  </label>
+  <div class="input-group w-75">
+    <div class="input-group-prepend">
+      <span><i class="input-group-text material-icons ml-5 ml-2" style="vertical-align:middle">movie_filter</i></span>
+    </div>
+    <input class="form-control" id="search" name="search" type="text" (keyup)="searchMovie()" [(ngModel)]="searchKey"
+      placeholder="Search Movie" />
+  </div>
+</div>
+<app-movie-info [movie]='movieSearch'></app-movie-info>

@@ -1,0 +1,24 @@
+<div class="container" *ngIf="error!=''">
+  <h3 class=" w-75 mx-auto">Favorites </h3>
+  <div class="p-3 w-75 mx-auto alert alert-danger">{{error}} Use <a routerLink="/movie-list"
+      routerLinkActive="active-link" class="alert-link">'Add to Favorites'</a> option in movie list.
+  </div>
+</div>
+<div class="container width-half-screen" *ngIf="error == ''">
+  <h3>Favorites</h3>
+  <div class="p-3 alert alert-success" *ngIf="favoriteItemDeleted">Favorite item deleted successfully.</div>
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between " *ngFor="let item of favorite.moviesList">
+      {{item.title}}
+      <span class="font-weight-light">
+        <div>{{item.genre}} </div>
+        <div class="float-right"><i (click)="onDeleteFavoritesClick(item.id)"
+            class="material-icons trash-can pr-2 text-secondary" style="vertical-align:middle">delete_forever</i></div>
+      </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      <h3> No of Favorites </h3>
+      <span>{{favorite.noOfFavorites}} </span>
+    </li>
+  </ul>
+</div>

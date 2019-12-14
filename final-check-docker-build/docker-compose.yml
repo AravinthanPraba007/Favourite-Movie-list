@@ -1,0 +1,134 @@
+version: '3'
+
+services:
+
+  final-check-mysql:
+
+    image: mysql:8.0.18
+    
+    container_name: final-check-mysql
+
+    ports:
+
+      - "3302:3306"    
+
+    environment:
+
+      - MYSQL_ROOT_PASSWORD=root
+
+    volumes:
+
+      - d:/moviecruiserdb:/var/lib/mysql
+
+      - ./dbscripts:/docker-entrypoint-initdb.d 
+
+    
+
+  eureka-discovery-service:
+
+    image: eureka-discovery-app
+
+    build: eureka-discovery-service/.
+
+    container_name: eureka-discovery-service
+
+    ports:
+
+      - 8761:8761
+
+     
+
+  authentication-service:
+
+    image: authentication-app
+
+    build: authentication-service/.
+
+    container_name: authentication-service
+
+    ports:
+
+      - 8083:8083     
+
+    depends_on:
+
+      - final-check-mysql
+
+      - eureka-discovery-service
+
+    links:
+
+      - final-check-mysql
+
+      - eureka-discovery-service
+
+
+  movies-service:
+
+    image: movies-app
+
+    build: movies-service/.
+
+    container_name: movies-service
+
+    ports:
+
+      - 8082:8082
+
+    depends_on:
+
+      - final-check-mysql
+
+      - eureka-discovery-service    
+
+    links:
+
+      - final-check-mysql
+
+      - eureka-discovery-service     
+
+  zuul-gateway-service:
+
+    image: zuul-gateway-app
+
+    build: zuul-gateway-service/.
+
+    container_name: zuul-gateway-service
+
+    ports:
+
+      - 8084:8084     
+
+    depends_on:
+
+      - authentication-service
+
+      - movies-service
+
+    links:
+
+      - authentication-service
+
+      - movies-service
+      
+  angular-application:
+
+    image: angular-application-app
+
+    build: angular-application/.
+
+    container_name: angular-application
+
+    ports:
+
+      - 8089:80     
+
+    depends_on:
+
+      - zuul-gateway-service
+
+    links:
+
+      - zuul-gateway-service
+
+      
